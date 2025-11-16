@@ -3,13 +3,8 @@ package com.gadgetzone.productdetail.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.gadgetzone.productdetail.presentation.navigation.NavGraph
-import com.gadgetzone.productdetail.presentation.ui.theme.ProductDetailTheme
+import com.gadgetzone.productdetail.presentation.navigation.MyNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavGraph(navController = navController)
+            MyNavGraph(navController = navController)
 
 //            ProductDetailTheme {
 //                Surface(

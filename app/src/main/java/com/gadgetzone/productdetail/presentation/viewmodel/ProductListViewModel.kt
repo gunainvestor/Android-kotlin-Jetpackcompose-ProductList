@@ -31,15 +31,20 @@ class ProductListViewModel @Inject constructor(
             getProductsUseCase()
                 .map { result ->
                     if (result.isSuccess) {
+                        val products = result.getOrNull() ?: emptyList()
                         ProductListUiState(
                             isLoading = false,
-                            products = result.getOrNull() ?: emptyList(),
+                            products = products,
+                            filteredProducts = filterProducts(products, _uiState.value.searchQuery),
+                            searchQuery = _uiState.value.searchQuery,
                             error = null
                         )
                     } else {
                         ProductListUiState(
                             isLoading = false,
                             products = emptyList(),
+                            filteredProducts = emptyList(),
+                            searchQuery = _uiState.value.searchQuery,
                             error = result.exceptionOrNull()?.message ?: "Unknown error occurred"
                         )
                     }
@@ -47,6 +52,25 @@ class ProductListViewModel @Inject constructor(
                 .collect { newState ->
                     _uiState.value = newState
                 }
+        }
+    }
+
+    fun searchProducts(query: String) {
+        _uiState.value = _uiState.value.copy(
+            searchQuery = query,
+            filteredProducts = filterProducts(_uiState.value.products, query)
+        )
+    }
+
+    private fun filterProducts(products: List<com.gadgetzone.productdetail.domain.model.Product>, query: String): List<com.gadgetzone.productdetail.domain.model.Product> {
+        if (query.isBlank()) {
+            return products
+        }
+        val lowerQuery = query.lowercase()
+        return products.filter { product ->
+            product.title.lowercase().contains(lowerQuery) ||
+            product.category.lowercase().contains(lowerQuery) ||
+            product.description.lowercase().contains(lowerQuery)
         }
     }
 }

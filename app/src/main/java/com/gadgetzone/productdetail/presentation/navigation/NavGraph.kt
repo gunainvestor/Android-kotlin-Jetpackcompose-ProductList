@@ -17,7 +17,7 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun MyNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = Screen.ProductList.route
