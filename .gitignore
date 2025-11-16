@@ -53,6 +53,9 @@ captures/
 .idea/deploymentTargetSelector.xml
 .idea/deviceManager.xml
 
+# VS Code
+.vscode/
+
 # Keystore files
 *.jks
 *.keystore
