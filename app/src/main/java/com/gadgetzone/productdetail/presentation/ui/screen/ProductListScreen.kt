@@ -43,7 +43,7 @@ fun ProductListScreen(
             SearchBar(
                 searchQuery = uiState.searchQuery,
                 onSearchQueryChange = { viewModel.searchProducts(it) },
-                modifier = Modifier.padding(16.dp)
+
             )
 
             val error = uiState.error
@@ -65,34 +65,29 @@ fun ProductListScreen(
                 }
                 uiState.filteredProducts.isEmpty() && uiState.searchQuery.isNotBlank() -> {
                     Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
+
                     ) {
                         Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+
                         ) {
                             Text(
                                 text = "🔍",
-                                style = MaterialTheme.typography.displayMedium
                             )
                             Text(
                                 text = "No products found",
-                                style = MaterialTheme.typography.titleLarge,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+
                             )
                             Text(
                                 text = "Try searching with different keywords",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+
                             )
                         }
                     }
                 }
                 else -> {
                     LazyColumn(
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+
                     ) {
                         items(uiState.filteredProducts) { product ->
                             ProductItem(
@@ -117,7 +112,6 @@ fun SearchBar(
     OutlinedTextField(
         value = searchQuery,
         onValueChange = onSearchQueryChange,
-        modifier = modifier.fillMaxWidth(),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
@@ -128,10 +122,7 @@ fun SearchBar(
             Text("Search products...")
         },
         singleLine = true,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.surface,
-            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-        )
+
     )
 }
 
